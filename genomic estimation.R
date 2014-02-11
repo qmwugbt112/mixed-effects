@@ -7,8 +7,10 @@ library(rrBLUP)
 # Load HopperDat.csv
 Hdat<-read.table(file.choose(),header=T,sep=',')
 
+# Have a look
 Hdat[1:10,1:10]
 
+# Extract a matrix of the SNP data
 Gmat<-as.matrix(Hdat[,5:ncol(Hdat)])
 dim(Gmat)
 
@@ -76,3 +78,5 @@ plot(est2,testWeight)
 mod2<-lm(testWeight~0+est2)
 abline(mod2)
 anova(mod2)
+
+# Now estimate breeding values, and assess them for fecundity and heamaglutanin levels
