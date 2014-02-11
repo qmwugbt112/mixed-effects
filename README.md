@@ -6,14 +6,19 @@ Material for workshop on basic mixed effects models
 
 In order to make use of these materials you will need to be running
 R, ideally 3.x or later.  You will need internet access to install
-libraries nlme and rrBLUP
+libraries nlme, lattice and rrBLUP
 
-First create your own personal dataset by running the R Scipt my_dataset.
+First carry out the 'Analysis of Apple trees'.
+The first step is to create your own unique dataset
+(follow the instructions in the R script comments)
 
-Next run the analysis in mixed_effects
+After completing that analysis, do it for real using the rrBLUP package
+implemented in the 'genomic estimation' script. This uses a realistically
+large grasshopper SNP dataset (actually a real dataset, HopperDat.csv).
 
-Finally lets do this for real with rrBLUP in the Script 'genomic estimation.R'
 
-with a real SNP dataset HopperDat.csv
+The powerpoint slides for the course are also included
+
+
 
 
