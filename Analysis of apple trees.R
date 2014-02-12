@@ -21,8 +21,6 @@ head(MyData,30)
 
 
 
-cbind(appleWT, YearID,VarID,TreeID,Fdose)
-
 # use install.packages(c('nlme','lattice'),dependencies=T) if necessary
 # Then fire up the packages nlme
 
