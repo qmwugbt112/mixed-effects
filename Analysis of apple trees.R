@@ -64,22 +64,24 @@ xyplot(appleWT+fitted(M3)+fitted(M4)~TreeID)
 
 # Why is the shrinkage different in different trees?
 
-# Try fitting TreeID and Fdose like this
+# Try fitting TreeID, YearID and Fdose like this
 M7a<-lm(appleWT~TreeID+YearID+Fdose+VarID)
 
-#  fixed effects model do it?
-# Try this and see what goes on
+#  Look at M7a. What has gone wrong?
+# Why can't the fixed effect model do
+# all that you asked
 
 
-# Just fit Fdose as in a fixed effects model
-# but both Fdose and Tree as a random effect!
+# Fit Fdose alone in a fixed effects model
+# but both Fdose and YearID as a random effect!
 M7<-lm(appleWT~Fdose+TreeID)
 M8<-lme(appleWT~Fdose+TreeID,random=~1|YearID)
 
 xyplot(appleWT+fitted(M7)+fitted(M8)~Fdose|TreeID)
 
-# Why is it possible to fit a random effects model, but not a fixed effects model with both
-Fdose and TreeID??
+# Why is it possible to fit both Fdose and YearID 
+# in a random effects model ??
+# Why might that be apropriate ?
 
 ######################################################
 ########### Exercise ends ############################
