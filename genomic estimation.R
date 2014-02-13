@@ -17,7 +17,7 @@ dim(Gmat)
 Gmat[1:10,1:10]
 
 ########## Richard's quick and dirty imputation###################
-######### Replace missing vallues with the column mean #########
+######### Replace missing values with the column mean #########
 Gmat[is.na(Gmat)]<-rep(colMeans(Gmat,na.rm=T),colSums(is.na(Gmat)))
 
 ##################################################################
@@ -34,7 +34,7 @@ Weight<-Hdat$Weight
 ############ to leave out of the training dataset         #######
 																#
 # Find row numbers for lines with missing values 					
-# They can't be used for training (can't be used for)			
+# They can't be used for training 			
 missing.weight<-which(is.na(Weight))							
 																
 #define the training and test populations						
