@@ -17,7 +17,7 @@ dim(Gmat)
 Gmat[1:10,1:10]
 
 ########## Richard's quick and dirty imputation###################
-######### Replace missing vallues witht the column mean #########
+######### Replace missing vallues with the column mean #########
 Gmat[is.na(Gmat)]<-rep(colMeans(Gmat,na.rm=T),colSums(is.na(Gmat)))
 
 ##################################################################
