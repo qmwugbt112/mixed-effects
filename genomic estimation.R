@@ -39,9 +39,10 @@ missing.weight<-which(is.na(Weight))
 																
 #define the training and test populations						
 #training-60% validation-40%
-nLines<-length(Weight)
+
 
 #make a random selection of 60% of the grasshoppers
+nLines<-length(Weight)
 train= sample(1:nLines,(.6)*(nLines))
 
 # remove lines with missing values from training set
