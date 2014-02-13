@@ -1,5 +1,5 @@
 # if necessary install rrBLUP
-install.packages(rrBLUP,dependencies=T)
+install.packages('rrBLUP',dependencies=T)
 
 # load the library
 library(rrBLUP)
