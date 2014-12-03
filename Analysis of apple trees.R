@@ -111,8 +111,22 @@ library(rrBLUP)
 BLUP<-mixed.solve(phenotypeWT,Z=genotypes,
 			K = NULL, SE = FALSE, return.Hinv=FALSE)
 
+# Show that BLUP has successfully obtained an (over) accurate estimate of phenotype
+# by taking the BLUP estimates of the genotypic effects 'u' and multiplying them by 
+# genotye
+
 est<-as.vector(genotypes%*%BLUP$u)
-plot(est,phenotypes)
+plot(est,phenotypeWT)
+
+# Actually they have over-fitted the data as you can see by plotting these values
+# against the true genotypic effects
+
+plot(expectedWT,est)
+
+
+#### Super advanced stuff######
+# you can show this in real life by using half the data to estimate u
+# then using it to predict the other half
 
 testWT<-phenotypeWT[16:30]
 trainWT<-phenotypeWT[1:15]
