@@ -2,10 +2,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # install.packages('rrBLUP',dependencies=T)
 =======
 install.packages('rrBLUP',dependencies=T)
 >>>>>>> 2e6386641e9327231b3d0acf04080ee36c9a3678
+=======
+install.packages('rrBLUP',dependencies=T)
+>>>>>>> FETCH_HEAD
 =======
 install.packages('rrBLUP',dependencies=T)
 >>>>>>> FETCH_HEAD
