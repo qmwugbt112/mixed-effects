@@ -81,7 +81,11 @@ nIndivs<-30;nLoci=40
 genotypes<-matrix(sample(-1:1,nIndivs*nLoci,T),nrow=nIndivs)
 
 # look at the genotype data using the head(command)
+
+# now generate the effects of each locus
 locusEffects<-rnorm(nLoci,sd=3)
+
+# Look at the effect size for each locus by printing the values
 
 # Use matrix multiplication to obtain expected phenotype
 expectedWT<-100+genotypes %*% locusEffects
