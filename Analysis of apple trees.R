@@ -10,7 +10,7 @@ hist(apples1,xlim=c(0,100),breaks=seq(0,150,5), border='green')
 hist(apples2,xlim=c(0,100),breaks=seq(0,150,5), border='red')
 hist(apples3,xlim=c(0,100),breaks=seq(0,150,5), border='blue')
 
-# use the mean() and sd() commands to obtain the mean and SD of each distribution
+# use the mean() and sd() commands to obtain the mean and SD for each tree
 # compare them with your neighbour
 
 # use lm() command to find the mean & residual variation for each of apples1-3
@@ -74,7 +74,7 @@ xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
 # Applying this logic to genetic data
 
 # Generate some genotypes
-nIndivs<-20;nLoci=40
+nIndivs<-30;nLoci=40
 genotypes<-matrix(sample(-1:1,nIndivs*nLoci,T),nrow=nIndivs)
 
 # look at the genotype data using the head(command)
@@ -88,9 +88,41 @@ expectedWT<-100+genotypes %*% locusEffects
 # add the environmental variation to get the phenotype
 phenotypeWT<-expectedWT+rnorm(nIndivs,sd=2)
 
-mod10<-lme(phenotypeWT~1,random=~genotypes|1)
+# see that lm doesnt work
+mod10<-lm(phenotypeWT~genotypes)
+summary(mod10)
 
+# Why does it not work?
 
+## We can try a special version of mixed effects modelling to analyse this relationship
+install.packages('rrBLUP',dependencies=T)
+# load the library
+library(rrBLUP)
+
+testWT<-phenotypeWT[16:30]
+trainWT<-phenotypeWT[1:15]
+testG<-genotypes[16:30,]
+trainG<-genotypes[1:15,]
+
+BLUP1<-mixed.solve(trainWT,Z=trainG,K = NULL, SE = FALSE, return.Hinv=FALSE)
+
+# Show that estimated effects matrix-multiplied by genotype is the prediction
+
+est1<-as.vector(trainG%*%BLUP1$u)
+plot(est1,trainWT)
+
+# compare the prediction vs the true values
+plot(est1,expectedWT[1:15])
+
+# now the harder task, use the estimates to predict the phenotypes that were 
+# excluded from the analysis
+
+est2<-as.vector(testG%*%GCA_BLUP$u)
+
+plot(est2,testWT)
+
+# Advanced: why is the 2nd correlation poorer
+# What happens if you add more environmental variation to the phenotype?
 
 ######################################################
 ########### Exercise ends ############################
