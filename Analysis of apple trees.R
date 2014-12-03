@@ -31,7 +31,10 @@ treef<-factor(rep(c('Tree1','Tree2','Tree3'),each=40))
 # Why are the values relating to the other two means not the same as you found before?
 # Why are the standard errors for these two values the same, when they have different variances?
 
-# Install the library allowing you to run mixed effects models
+
+# If necessary install the nlme library using install.packages('nlme',dependencies=T)
+
+# Load the library allowing you to run mixed effects models
 library(nlme)
 
 # Fit a simple nlme
