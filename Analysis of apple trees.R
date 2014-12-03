@@ -76,7 +76,7 @@ xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
 ##################################################################
 # Applying this logic to genetic data
 
-# Generate some genotypes
+# Generate some random genotypes
 nIndivs<-30;nLoci=40
 genotypes<-matrix(sample(-1:1,nIndivs*nLoci,T),nrow=nIndivs)
 
@@ -95,6 +95,8 @@ expectedWT<-100+genotypes %*% locusEffects
 # add the environmental variation to get the phenotype
 phenotypeWT<-expectedWT+rnorm(nIndivs,sd=2)
 
+# use the plot function to compare expected and observed phenotypes
+
 # see that lm doesnt work
 mod10<-lm(phenotypeWT~genotypes)
 summary(mod10)
@@ -105,6 +107,12 @@ summary(mod10)
 install.packages('rrBLUP',dependencies=T)
 # load the library
 library(rrBLUP)
+
+BLUP<-mixed.solve(phenotypeWT,Z=genotypes,
+			K = NULL, SE = FALSE, return.Hinv=FALSE)
+
+est<-as.vector(genotypes%*%BLUP$u)
+plot(est,phenotypes)
 
 testWT<-phenotypeWT[16:30]
 trainWT<-phenotypeWT[1:15]
