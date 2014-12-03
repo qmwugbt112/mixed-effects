@@ -56,7 +56,7 @@ for (i in c('Tree1','Tree2','Tree3')) {
 				residV<-allApples[treef==i]-mean(allApples[treef==i])
 				treeM<-mean(allApples[treef==i])
 				heightEffect<-height[treef==i]*runif(1,20,40)+runif(1,0,5)
-				allApplesh[treef==i]<-abs(treeM+heightEffect)/35+residV
+				allApplesh[treef==i]<-treeM+abs(heightEffect)/35+residV
 				}
 
  # enable lattice plots
