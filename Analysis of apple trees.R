@@ -68,7 +68,7 @@ mod5<-lme(allApples~1,random=~1|treef)
 # Examine the result using the summary() command
 # what is the intercept of the fixed effect equal to ?
 # what do the StdDev:    (Intercept) Residual refer to
-# Use the plot(fitted()) command to see what the predictions are for each tree
+
 
 # See how these new fitted values compare to the raw mean values
 
@@ -89,8 +89,8 @@ lines(xvals,(likeMean3))
 abline(v=fitted(mod5)[treef=='Tree3'],col='red')
 
 # Are theseequal to the means of each tree?
-# use type out the fitted values 'fitted(mod5)'
-# then use unique(fitted(mod5)) get range of values for each apple (new)
+# Use the plot(fitted()) command to see what the predictions are for each tree
+# Use unique(fitted()) combination to pull out the values
 # compare them to your previous estimates
 
 
