@@ -180,6 +180,9 @@ plot(est,phenotypeWT)
 
 plot(expectedWT,est)
 
+# Compare the estimated genotypic effects, BLUP$u 
+# with the real 'locusEffects' , using plot()
+
 
 #### Super advanced stuff######
 # you can show this in real life by using half the data to estimate u
