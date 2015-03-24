@@ -206,7 +206,7 @@ plot(est1,expectedWT[1:15])
 # now the harder task, use the estimates to predict the phenotypes that were 
 # excluded from the analysis
 
-est2<-as.vector(testG%*%GCA_BLUP$u)
+est2<-as.vector(testG%*%BLUP1$u)
 
 plot(est2,testWT)
 
