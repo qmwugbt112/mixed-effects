@@ -94,18 +94,25 @@ abline(v=fitted(mod5)[treef=='Tree3'],col='red')
 # compare them to your previous estimates
 
 
-#******This bit needs fixing!!*******
-# run this command to modify your data so that weight of each apple depends 
-# on its height in the tree (don't worry too much if you don't understand it)
 
-allApplesh<-rep(0,120)
-height<-runif(120,1,3)
-for (i in c('Tree1','Tree2','Tree3')) {
-				residV<-allApples[treef==i]-mean(allApples[treef==i])
-				treeM<-mean(allApples[treef==i])
-				heightEffect<-height[treef==i]*runif(1,20,40)+runif(1,0,5)
-				allApplesh[treef==i]<-abs(treeM+heightEffect)/35+residV
-				}
+# run this command to modify your data so that weight of each apple depends 
+# on its height in the tree 
+
+numTrees<-4			# Number of trees (each has 30 apples)
+
+allApplesh<-rnorm(numTrees*30,40,3)	# give all apples a random element to their weight
+height<-runif(numTrees*30,1,3)		# give all apples a randomly allocated height on the tree
+treef<-factor(rep(paste('Tree',1:numTrees),each=30))	# A factor to identify the trees (each with 30 apples)
+
+treeIntercepts<-rnorm(numTrees,0,5)	# for each tree choose a value for the intercept 
+treeSlopes<-rnorm(numTrees,0,3)		# and slope for the regression of apple weight on height
+
+# Calculate the effect of height in the tree on each apple in each tree and plot
+extraWt<-height*treeSlopes[treef]+treeIntercepts[treef]
+plot(height,extraWt)
+
+# add the height effect and underlying variation together
+allApplesh<-allApplesh+extraWt
 
  # enable lattice plots
  library(lattice)
@@ -116,6 +123,7 @@ xyplot(allApplesh~height|treef)
 # Fit a different fixed effect of height for each tree, plus the random effects
 mod6<-lme(allApplesh~height+height/treef,random=~1|treef)
 mod7<-lm(allApplesh~height*treef)
+mod8<-lme(allApplesh~1,random=~height|treef)
 xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
