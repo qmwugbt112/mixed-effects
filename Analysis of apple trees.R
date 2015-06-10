@@ -104,7 +104,7 @@ allApplesh<-rnorm(numTrees*30,40,3)	# give all apples a random element to their 
 height<-runif(numTrees*30,1,3)		# give all apples a randomly allocated height on the tree
 treef<-factor(rep(paste('Tree',1:numTrees),each=30))	# A factor to identify the trees (each with 30 apples)
 
-treeIntercepts<-rnorm(numTrees,0,5)	# for each tree choose a value for the intercept 
+treeIntercepts<-rnorm(numTrees,0,9)	# for each tree choose a value for the intercept 
 treeSlopes<-rnorm(numTrees,0,3)		# and slope for the regression of apple weight on height
 
 # Calculate the effect of height in the tree on each apple in each tree and plot
@@ -123,8 +123,8 @@ xyplot(allApplesh~height|treef)
 # Fit a different fixed effect of height for each tree, plus the random effects
 mod6<-lme(allApplesh~height+height/treef,random=~1|treef)
 mod7<-lm(allApplesh~height*treef)
-mod8<-lme(allApplesh~1,random=~height|treef)
-xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
+mod8<-lme(allApplesh~height,random=~height|treef)
+xyplot(allApplesh+fitted(mod7)+fitted(mod8)~height|treef)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
 # generate a new modified dataset if your effect is not obvious
