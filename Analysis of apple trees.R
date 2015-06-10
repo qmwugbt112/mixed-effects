@@ -94,7 +94,7 @@ abline(v=fitted(mod5)[treef=='Tree3'],col='red')
 # compare them to your previous estimates
 
 
-
+#******This bit needs fixing!!*******
 # run this command to modify your data so that weight of each apple depends 
 # on its height in the tree (don't worry too much if you don't understand it)
 
