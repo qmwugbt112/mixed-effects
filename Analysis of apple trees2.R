@@ -1,6 +1,5 @@
 
-
-# For the initial exercise use the following to generate your own unique dataset for tree1, 2 & 3
+# For the initial exercise generate your own unique dataset for tree1, 2 & 3
 Na=20
 apples1<-rnorm(Na,rnorm(1,20,3),rnorm(1,5))
 apples2<-rnorm(Na,rnorm(1,40,3),rnorm(1,15))
@@ -68,7 +67,7 @@ mod5<-lme(allApples~1,random=~1|treef)
 # Examine the result using the summary() command
 # what is the intercept of the fixed effect equal to ?
 # what do the StdDev:    (Intercept) Residual refer to
-
+# Use the plot(fitted()) command to see what the predictions are for each tree
 
 # See how these new fitted values compare to the raw mean values
 
@@ -89,30 +88,23 @@ lines(xvals,(likeMean3))
 abline(v=fitted(mod5)[treef=='Tree3'],col='red')
 
 # Are theseequal to the means of each tree?
-# Use the plot(fitted()) command to see what the predictions are for each tree
-# Use unique(fitted()) combination to pull out the values
+# use type out the fitted values 'fitted(mod5)'
+# then use unique(fitted(mod5)) get range of values for each apple (new)
 # compare them to your previous estimates
 
 
 
 # run this command to modify your data so that weight of each apple depends 
-# on its height in the tree 
+# on its height in the tree (don't worry too much if you don't understand it)
 
-numTrees<-4			# Number of trees (each has 30 apples)
-
-allApplesh<-rnorm(numTrees*30,40,3)	# give all apples a random element to their weight
-height<-runif(numTrees*30,1,3)		# give all apples a randomly allocated height on the tree
-treef<-factor(rep(paste('Tree',1:numTrees),each=30))	# A factor to identify the trees (each with 30 apples)
-
-treeIntercepts<-rnorm(numTrees,0,9)	# for each tree choose a value for the intercept 
-treeSlopes<-rnorm(numTrees,0,3)		# and slope for the regression of apple weight on height
-
-# Calculate the effect of height in the tree on each apple in each tree and plot
-extraWt<-height*treeSlopes[treef]+treeIntercepts[treef]
-plot(height,extraWt)
-
-# add the height effect and underlying variation together
-allApplesh<-allApplesh+extraWt
+allApplesh<-rep(0,120)
+height<-runif(120,1,3)
+for (i in c('Tree1','Tree2','Tree3')) {
+				residV<-allApples[treef==i]-mean(allApples[treef==i])
+				treeM<-mean(allApples[treef==i])
+				heightEffect<-height[treef==i]*runif(1,20,40)+runif(1,0,5)
+				allApplesh[treef==i]<-abs(treeM+heightEffect)/35+residV
+				}
 
  # enable lattice plots
  library(lattice)
@@ -123,8 +115,7 @@ xyplot(allApplesh~height|treef)
 # Fit a different fixed effect of height for each tree, plus the random effects
 mod6<-lme(allApplesh~height+height/treef,random=~1|treef)
 mod7<-lm(allApplesh~height*treef)
-mod8<-lme(allApplesh~height,random=~height|treef)
-xyplot(allApplesh+fitted(mod7)+fitted(mod8)~height|treef)
+xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
 # generate a new modified dataset if your effect is not obvious
@@ -146,11 +137,7 @@ dimnames(genotypes)<-gnames
 genotypes[1:10,1:7]
 
 # look at the genotype data using the head(command)
-
-# now generate the effects of each locus
 locusEffects<-rnorm(nLoci,sd=3)
-
-# Look at the effect size for each locus by printing the values
 
 # Use matrix multiplication to obtain expected phenotype
 expectedWT<-100+genotypes %*% locusEffects
@@ -159,8 +146,6 @@ expectedWT<-100+genotypes %*% locusEffects
 
 # add the environmental variation to get the phenotype
 phenotypeWT<-expectedWT+rnorm(nIndivs,sd=2)
-
-# use the plot function to compare expected and observed phenotypes
 
 # see that lm doesnt work
 mod10<-lm(phenotypeWT~genotypes)
@@ -172,29 +157,6 @@ summary(mod10)
 install.packages('rrBLUP',dependencies=T)
 # load the library
 library(rrBLUP)
-
-BLUP<-mixed.solve(phenotypeWT,Z=genotypes,
-			K = NULL, SE = FALSE, return.Hinv=FALSE)
-
-# Show that BLUP has successfully obtained an (over) accurate estimate of phenotype
-# by taking the BLUP estimates of the genotypic effects 'u' and multiplying them by 
-# genotye
-
-est<-as.vector(genotypes%*%BLUP$u)
-plot(est,phenotypeWT)
-
-# Actually they have over-fitted the data as you can see by plotting these values
-# against the true genotypic effects
-
-plot(expectedWT,est)
-
-# Compare the estimated genotypic effects, BLUP$u 
-# with the real 'locusEffects' , using plot()
-
-
-#### Super advanced stuff######
-# you can show this in real life by using half the data to estimate u
-# then using it to predict the other half
 
 testWT<-phenotypeWT[16:30]
 trainWT<-phenotypeWT[1:15]
@@ -214,7 +176,7 @@ plot(est1,expectedWT[1:15])
 # now the harder task, use the estimates to predict the phenotypes that were 
 # excluded from the analysis
 
-est2<-as.vector(testG%*%BLUP1$u)
+est2<-as.vector(testG%*%GCA_BLUP$u)
 
 plot(est2,testWT)
 
