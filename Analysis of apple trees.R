@@ -1,6 +1,7 @@
 
 
-# For the initial exercise use the following to generate your own unique dataset for tree1, 2 & 3
+# For the initial exercise use the following code 
+# to generate your own unique dataset for tree1, 2 & 3
 Na=20
 apples1<-rnorm(Na,rnorm(1,20,3),rnorm(1,5))
 apples2<-rnorm(Na,rnorm(1,40,3),rnorm(1,15))
@@ -16,14 +17,29 @@ likeMean2<-dnorm(xvals,mean=mean(apples2),sd=sd(apples2)/Na^.5)*100
 likeMean3<-dnorm(xvals,mean=mean(apples3),sd=sd(apples3)/Na^.5)*100
 
 # Plot the raw data
-hist(apples1,xlim=c(0,100),ylim=c(0,max(likeMean1)),breaks=seq(0,150,5), border='purple')
-lines(xvals,dnorm(xvals,mean=mean(apples1),sd=sd(apples1))*100,col='purple')
+hist(	apples1,xlim=c(0,100),
+		ylim=c(0,max(likeMean1)),breaks=seq(0,150,5), border='purple',
+		main='Weights of apples on Tree 1')
+		
+lines(	xvals,
+		dnorm(xvals,mean=mean(apples1),sd=sd(apples1))*100,
+		col='purple')
 
-hist(apples2,xlim=c(0,100),ylim=c(0,max(likeMean2)),breaks=seq(0,150,5), border='red')
-lines(xvals,dnorm(xvals,mean=mean(apples2),sd=sd(apples2))*100,col='red')
+hist(	apples2,xlim=c(0,100),
+		ylim=c(0,max(likeMean2)),breaks=seq(0,150,5), border='red',
+		main='Weights of apples on Tree 2')
 
-hist(apples3,xlim=c(0,100),ylim=c(0,max(likeMean3)),breaks=seq(0,150,5), border='blue')
-lines(xvals,dnorm(xvals,mean=mean(apples3),sd=sd(apples3))*100,col='blue')
+lines(	xvals,
+		dnorm(xvals,mean=mean(apples2),sd=sd(apples2))*100,
+		col='red')
+
+hist(	apples3,xlim=c(0,100),
+		ylim=c(0,max(likeMean3)),breaks=seq(0,150,5), border='blue',
+		main='Weights of apples on Tree 3')
+		
+lines(	xvals,dnorm(xvals,
+		mean=mean(apples3),sd=sd(apples3))*100,
+		col='blue')
 
 # use the mean() and sd() commands to obtain the mean and SD for each tree
 # compare them with your neighbour

@@ -1,0 +1,9 @@
+---
+title: "An introduction to mixed-effects models"
+author: "Richard Nichols & Hannes Becher"
+date: "11th June 2015"
+output: "html_document"
+---
+
+## Lower level heading
+some text to go with the first heading
