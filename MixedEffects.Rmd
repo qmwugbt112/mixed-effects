@@ -38,7 +38,7 @@ sd() to show that this is the case.  We can just print them out
 ```{R}
 mean(apples1); TreeMean1; sd(apples1); TreeSD1
 ```
-Here they are set them out in a table
+Here they are set out in a table
 
 ```{R Display Table, results='asis', echo=FALSE}
 library(stargazer)
