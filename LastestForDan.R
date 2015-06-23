@@ -1,6 +1,6 @@
 # Generate some genotypes
 # nLarge loci have large effects, nSmall have small and the rest have zero
-nIndivs<-30;nLoci=40;nLarge=10;nSmall<-20 
+nIndivs<-300;nLoci=200;nLarge=10;nSmall<-50 
 
 genotypes<-matrix(sample(-1:1,nIndivs*nLoci,T),nrow=nIndivs)
 
@@ -41,11 +41,9 @@ plot(expectedP,est)
 
 
 # Plot estiamtes of effect size
-plot(genomic_effects,BLUP$u)
-points(genomic_effects[large_locations],BLUP$u[large_locations],col='red')
-points(genomic_effects[small_locations],BLUP$u[small_locations],col='blue')
-
-
+plot(genomic_effects,BLUP$u,cex=.5)
+points(genomic_effects[large_locations],BLUP$u[large_locations],col='red',cex=.5)
+points(genomic_effects[small_locations],BLUP$u[small_locations],col='blue',cex=.5)
 abline(0,1)
 
 

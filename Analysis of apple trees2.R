@@ -1,5 +1,5 @@
 
-# For the initial exercise generate your own unique dataset for tree1, 2 & 3
+# For the initial exercise generate your own unique dataset for trees 1, 2 & 3
 Na=20
 apples1<-rnorm(Na,rnorm(1,20,3),rnorm(1,5))
 apples2<-rnorm(Na,rnorm(1,40,3),rnorm(1,15))
