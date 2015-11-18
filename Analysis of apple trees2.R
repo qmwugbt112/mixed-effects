@@ -1,55 +1,71 @@
 
 # For the initial exercise generate your own unique dataset for trees 1, 2 & 3
-Na=20
-apples1<-rnorm(Na,rnorm(1,20,3),rnorm(1,5))
-apples2<-rnorm(Na,rnorm(1,40,3),rnorm(1,15))
-apples3<-rnorm(Na,rnorm(1,80,3),rnorm(1,10))
+# That means you will be using diffenet data than your neighbours.
+Nap = 20
+apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 5))
+apples2 <- rnorm(Nap, rnorm(1, 40, 3), rnorm(1, 15))
+apples3 <- rnorm(Nap, rnorm(1, 80, 3), rnorm(1, 10))
 
 # Set up some graphical parameters
-par(mfrow=c(3,1))
-xvals<-0:100
+par(mfrow = c(3, 1))
+xvals <- 0:100
 
 # Calculate the likelihood curves (normalized)
-likeMean1<-dnorm(xvals,mean=mean(apples1),sd=sd(apples1)/Na^.5)*100
-likeMean2<-dnorm(xvals,mean=mean(apples2),sd=sd(apples2)/Na^.5)*100
-likeMean3<-dnorm(xvals,mean=mean(apples3),sd=sd(apples3)/Na^.5)*100
+likeMean1 <- dnorm(xvals, mean = mean(apples1), sd = sd(apples1) / Nap ^ .5) * 100
+likeMean2 <- dnorm(xvals, mean = mean(apples2), sd = sd(apples2) / Nap ^ .5) * 100
+likeMean3 <- dnorm(xvals, mean = mean(apples3), sd = sd(apples3) / Nap ^ .5) * 100
 
 # Plot the raw data
-hist(apples1,xlim=c(0,100),ylim=c(0,max(likeMean1)),breaks=seq(0,150,5), border='purple')
-lines(xvals,dnorm(xvals,mean=mean(apples1),sd=sd(apples1))*100,col='purple')
+hist(apples1, xlim = c(0, 100), ylim = c(0, max(likeMean1)),
+     breaks = seq(0, 150, 5), border = 'purple')
+lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
+      col = 'purple')
 
-hist(apples2,xlim=c(0,100),ylim=c(0,max(likeMean2)),breaks=seq(0,150,5), border='red')
-lines(xvals,dnorm(xvals,mean=mean(apples2),sd=sd(apples2))*100,col='red')
+hist(apples2, xlim = c(0,100), ylim = c(0, max(likeMean2)),
+     breaks = seq(0, 150, 5), border = 'red')
+lines(xvals, dnorm(xvals, mean = mean(apples2), sd = sd(apples2)) * 100,
+      col = 'red')
 
-hist(apples3,xlim=c(0,100),ylim=c(0,max(likeMean3)),breaks=seq(0,150,5), border='blue')
-lines(xvals,dnorm(xvals,mean=mean(apples3),sd=sd(apples3))*100,col='blue')
+hist(apples3, xlim = c(0,100), ylim = c(0, max(likeMean3)),
+     breaks = seq(0, 150, 5), border = 'blue')
+lines(xvals, dnorm(xvals, mean = mean(apples3), sd = sd(apples3)) * 100,
+      col = 'blue')
 
-# use the mean() and sd() commands to obtain the mean and SD for each tree
-# compare them with your neighbour
+# What do the histograms represent? What are the curves?
 
-# use lm() command to find the mean & residual variation for each of apples1-3
-# e.g. mod1<-lm(apples1~1); summary(mod1)
-# Make sure you understand what the residual standard error is
-# make sure you understand what the intercept and 'Std. Error' (of the intercept) is, and why it is different
+# Use the mean() and sd() commands to obtain the mean and SD for each tree.
+# Compare them with your neighbour. Remember they got different data.
+# Who's got the better trees?
+
+
+# Use the lm() command to find the mean & residual variation for each of
+# apples1-3. E.g. mod1<-lm(apples1~1); summary(mod1)
+
+
+# Make sure you understand what the residual standard error is.
+# Make sure you understand what the intercept and
+# 'Std. Error' (of the intercept) is, and why it is different.
 # How do these values relate to the mean and sd you calculated?
 
-# plot out the likelihood curves, how do they relate to the Std. Error
-par(mfrow=c(3,1))
-hist(apples1,xlim=c(0,100),ylim=c(0,max(likeMean1)),breaks=seq(0,150,5), border='purple')
-lines(xvals,dnorm(xvals,mean=mean(apples1),sd=sd(apples1))*100,col='purple')
-lines(xvals,(likeMean1))
+# Plot out the likelihood curves. How do they relate to the Std. Error?
+par(mfrow = c(3, 1))
+hist(apples1, xlim = c(0, 100), ylim = c(0, max(likeMean1)),
+     breaks = seq(0, 150, 5), border = 'purple')
+lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
+      col = 'purple')
+lines(xvals, likeMean1)
 
-hist(apples2,xlim=c(0,100),ylim=c(0,max(likeMean2)),breaks=seq(0,150,5), border='red')
-lines(xvals,dnorm(xvals,mean=mean(apples2),sd=sd(apples2))*100,col='red')
-lines(xvals,(likeMean2))
+hist(apples2,xlim = c(0, 100), ylim = c(0, max(likeMean2)), breaks = seq(0, 150, 5), border = 'red')
+lines(xvals, dnorm(xvals, mean = mean(apples2), sd = sd(apples2)) * 100, col = 'red')
+lines(xvals, likeMean2)
 
-hist(apples3,xlim=c(0,100),ylim=c(0,max(likeMean3)),breaks=seq(0,150,5), border='blue')
-lines(xvals,dnorm(xvals,mean=mean(apples3),sd=sd(apples3))*100,col='blue')
-lines(xvals,(likeMean3))
+hist(apples3, xlim = c(0, 100), ylim = c(0, max(likeMean3)), breaks = seq(0, 150, 5), border = 'blue')
+lines(xvals, dnorm(xvals, mean = mean(apples3), sd = sd(apples3)) * 100, col = 'blue')
+lines(xvals, likeMean3)
 
 # Now bind your dataset into one long vector, and create a factor to distinguish the data from each tree
-allApples<-c(apples1,apples2,apples3)
-treef<-factor(rep(c('Tree1','Tree2','Tree3'),each=Na))
+allApples <- c(apples1, apples2, apples3)
+treef <- factor(rep(c('Tree1', 'Tree2', 'Tree3'), each = Nap))
 # print them out to have a look by typing their names 'allApples' and 'treef'
 
 # use mod4<-lm(allApples~treef) to fit all 3 tree means.
@@ -62,7 +78,7 @@ treef<-factor(rep(c('Tree1','Tree2','Tree3'),each=Na))
 library(nlme)
 
 # Fit a simple nlme
-mod5<-lme(allApples~1,random=~1|treef)
+mod5<-lme(allApples ~ 1, random = ~ 1 | treef)
 
 # Examine the result using the summary() command
 # what is the intercept of the fixed effect equal to ?
@@ -71,21 +87,27 @@ mod5<-lme(allApples~1,random=~1|treef)
 
 # See how these new fitted values compare to the raw mean values
 
-par(mfrow=c(3,1))
-hist(apples1,xlim=c(0,100),ylim=c(0,max(likeMean1)),breaks=seq(0,150,5), border='purple')
-lines(xvals,dnorm(xvals,mean=mean(apples1),sd=sd(apples1))*100,col='purple')
-lines(xvals,(likeMean1))
-abline(v=fitted(mod5)[treef=='Tree1'],col='red')
+par(mfrow = c(3, 1))
+hist(apples1, xlim = c(0, 100), ylim = c(0, max(likeMean1)),
+     breaks = seq(0, 150, 5), border = 'purple')
+lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
+      col = 'purple')
+lines(xvals, likeMean1)
+abline(v = fitted(mod5)[treef == 'Tree1'], col = 'red')
 
-hist(apples2,xlim=c(0,100),ylim=c(0,max(likeMean2)),breaks=seq(0,150,5), border='red')
-lines(xvals,dnorm(xvals,mean=mean(apples2),sd=sd(apples2))*100,col='red')
-lines(xvals,(likeMean2))
-abline(v=fitted(mod5)[treef=='Tree2'],col='red')
+hist(apples2, xlim=c(0, 100), ylim = c(0, max(likeMean2)),
+     breaks = seq(0, 150, 5), border = 'red')
+lines(xvals, dnorm(xvals, mean = mean(apples2), sd = sd(apples2)) * 100,
+      col = 'red')
+lines(xvals, likeMean2)
+abline(v = fitted(mod5)[treef == 'Tree2'], col = 'red')
 
-hist(apples3,xlim=c(0,100),ylim=c(0,max(likeMean3)),breaks=seq(0,150,5), border='blue')
-lines(xvals,dnorm(xvals,mean=mean(apples3),sd=sd(apples3))*100,col='blue')
-lines(xvals,(likeMean3))
-abline(v=fitted(mod5)[treef=='Tree3'],col='red')
+hist(apples3, xlim= c (0, 100), ylim = c(0, max(likeMean3)),
+     breaks = seq(0, 150, 5), border = 'blue')
+lines(xvals, dnorm(xvals, mean = mean(apples3), sd = sd(apples3)) * 100,
+      col = 'blue')
+lines(xvals, likeMean3)
+abline(v = fitted(mod5)[treef == 'Tree3'], col = 'red')
 
 # Are theseequal to the means of each tree?
 # use type out the fitted values 'fitted(mod5)'
@@ -97,25 +119,25 @@ abline(v=fitted(mod5)[treef=='Tree3'],col='red')
 # run this command to modify your data so that weight of each apple depends 
 # on its height in the tree (don't worry too much if you don't understand it)
 
-allApplesh<-rep(0,120)
-height<-runif(120,1,3)
-for (i in c('Tree1','Tree2','Tree3')) {
-				residV<-allApples[treef==i]-mean(allApples[treef==i])
-				treeM<-mean(allApples[treef==i])
-				heightEffect<-height[treef==i]*runif(1,20,40)+runif(1,0,5)
-				allApplesh[treef==i]<-abs(treeM+heightEffect)/35+residV
+allApplesh <- rep(0, 120)
+height <- runif(120, 1, 3)
+for (i in c('Tree1', 'Tree2', 'Tree3')) {
+				residV <- allApples[treef == i] - mean(allApples[treef == i])
+				treeM <- mean(allApples[treef == i])
+				heightEffect <- height[treef == i] * runif(1, 20, 40) + runif(1, 0, 5)
+				allApplesh[treef == i] <- abs(treeM + heightEffect) / 35 + residV
 				}
 
  # enable lattice plots
  library(lattice)
 
 # Use xyplot to examine the data
-xyplot(allApplesh~height|treef)
+xyplot(allApplesh ~ height | treef)
 
 # Fit a different fixed effect of height for each tree, plus the random effects
-mod6<-lme(allApplesh~height+height/treef,random=~1|treef)
-mod7<-lm(allApplesh~height*treef)
-xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
+mod6 <- lme(allApplesh ~ height + height / treef, random = ~ 1 | treef)
+mod7 <- lm(allApplesh ~ height * treef)
+xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
 # generate a new modified dataset if your effect is not obvious
@@ -124,61 +146,62 @@ xyplot(allApplesh+fitted(mod6)+fitted(mod7)~height|treef)
 # Applying this logic to genetic data
 
 # Generate some genotypes
-nIndivs<-30;nLoci=40
-genotypes<-matrix(sample(-1:1,nIndivs*nLoci,T),nrow=nIndivs)
+nIndivs <- 30; nLoci <- 40
+genotypes <- matrix(sample(-1:1, nIndivs * nLoci, T), nrow = nIndivs)
 
 # Give the rows and cols of the matrix appropriate names
-gnames<-list()
-gnames[[1]]<-paste("Ind", 1:nIndivs)
-gnames[[2]]<-paste("Loc", 1:nLoci)
-dimnames(genotypes)<-gnames
+gnames <- list()
+gnames[[1]] <- paste("Ind", 1:nIndivs)
+gnames[[2]] <- paste("Loc", 1:nLoci)
+dimnames(genotypes) <- gnames
 
 # print out the top left of the matrix
-genotypes[1:10,1:7]
+genotypes[1:10, 1:7]
 
 # look at the genotype data using the head(command)
-locusEffects<-rnorm(nLoci,sd=3)
+locusEffects <- rnorm(nLoci, sd = 3)
 
 # Use matrix multiplication to obtain expected phenotype
-expectedWT<-100+genotypes %*% locusEffects
+expectedWT <- 100 + genotypes %*% locusEffects
 
 # examine expectedWT
 
 # add the environmental variation to get the phenotype
-phenotypeWT<-expectedWT+rnorm(nIndivs,sd=2)
+phenotypeWT <- expectedWT + rnorm(nIndivs, sd = 2)
 
 # see that lm doesnt work
-mod10<-lm(phenotypeWT~genotypes)
+mod10 <- lm(phenotypeWT ~ genotypes)
 summary(mod10)
 
 # Why does it not work?
 
 ## We can try a special version of mixed effects modelling to analyse this relationship
-install.packages('rrBLUP',dependencies=T)
+# install.packages('rrBLUP', dependencies = T)
 # load the library
 library(rrBLUP)
 
-testWT<-phenotypeWT[16:30]
-trainWT<-phenotypeWT[1:15]
-testG<-genotypes[16:30,]
-trainG<-genotypes[1:15,]
+testWT <- phenotypeWT[16:30]
+trainWT <- phenotypeWT[1:15]
+testG <- genotypes[16:30, ]
+trainG <- genotypes[1:15, ]
 
-BLUP1<-mixed.solve(trainWT,Z=trainG,K = NULL, SE = FALSE, return.Hinv=FALSE)
+BLUP1 <- mixed.solve(trainWT, Z = trainG, K = NULL, SE = FALSE,
+                     return.Hinv = FALSE)
 
 # Show that estimated effects matrix-multiplied by genotype is the prediction
 
-est1<-as.vector(trainG%*%BLUP1$u)
-plot(est1,trainWT)
+est1 <- as.vector(trainG %*% BLUP1$u)
+plot(est1, trainWT)
 
 # compare the prediction vs the true values
-plot(est1,expectedWT[1:15])
+plot(est1, expectedWT[1:15])
 
 # now the harder task, use the estimates to predict the phenotypes that were 
 # excluded from the analysis
 
-est2<-as.vector(testG%*%GCA_BLUP$u)
+est2 <- as.vector(testG %*% GCA_BLUP$u)
 
-plot(est2,testWT)
+plot(est2, testWT)
 
 # Advanced: why is the 2nd correlation poorer
 # What happens if you add more environmental variation to the phenotype?
