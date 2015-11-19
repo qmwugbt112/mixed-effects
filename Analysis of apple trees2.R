@@ -124,7 +124,7 @@ height <- runif(3*Nap, 1, 3)
 for (i in c('Tree1', 'Tree2', 'Tree3')) {
 				residV <- allApples[treef == i] - mean(allApples[treef == i])
 				treeM <- mean(allApples[treef == i])
-				heightEffect <- height[treef == i] * runif(1, 40, 140) + runif(1, 0, 5)
+				heightEffect <- height[treef == i] * runif(1, 70, 140) + runif(1, 20, 40)
 				allApplesh[treef == i] <- abs(treeM + heightEffect) / 35 + residV
 				}
 
@@ -138,8 +138,13 @@ xyplot(allApplesh ~ height | treef)
 mod6 <- lme(allApplesh ~ height + height / treef, random = ~ 1 | treef)
 mod7 <- lm(allApplesh ~ height * treef)
 xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
-	type=c('p','l','l'),
- 	distribute.type=T)
+	type=c('p','l','l'), 	# Points for data lines for fitted values
+	lty=c(0,1,4),		# Line type absent, solid, dashed
+ 	distribute.type=T,	
+ 	xlab=list('Height',cex=1.5),
+ 	ylab=list('Apple Weight',cex=1.5),
+ 	key=list(text=list('Fixed (solid) & random effects (dashed) regression lines',cex=1.5))
+ 	)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
 # generate a new modified dataset if your effect is not obvious
