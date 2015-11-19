@@ -139,7 +139,7 @@ mod6 <- lme(allApplesh ~ height + height / treef, random = ~ 1 | treef)
 mod7 <- lm(allApplesh ~ height * treef)
 xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
 	type=c('p','l','l'), 	# Points for data lines for fitted values
-	lty=c(0,1,4),		# Line type absent, solid, dashed
+	lty=c(0,1,9),		# Line type absent, solid, dashed
  	distribute.type=T,	
  	xlab=list('Height',cex=1.5),
  	ylab=list('Apple Weight',cex=1.5),
