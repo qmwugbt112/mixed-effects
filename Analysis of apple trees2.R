@@ -124,8 +124,8 @@ height <- runif(3*Nap, 1, 3)
 for (i in c('Tree1', 'Tree2', 'Tree3')) {
 				residV <- allApples[treef == i] - mean(allApples[treef == i])
 				treeM <- mean(allApples[treef == i])
-				heightEffect <- height[treef == i] * runif(1, 70, 140) + runif(1, 20, 40)
-				allApplesh[treef == i] <- abs(treeM + heightEffect) / 35 + residV
+				heightEffect <- height[treef == i] * runif(1, 10, 140) + runif(1, 20, 40)
+				allApplesh[treef == i] <- abs((treeM + heightEffect) / 25 + residV)
 				}
 
  # enable lattice plots
