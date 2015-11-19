@@ -119,8 +119,8 @@ abline(v = fitted(mod5)[treef == 'Tree3'], col = 'red')
 # run this command to modify your data so that weight of each apple depends 
 # on its height in the tree (don't worry too much if you don't understand it)
 
-allApplesh <- rep(0, 120)
-height <- runif(120, 1, 3)
+allApplesh <- rep(0, 3*Nap)
+height <- runif(3*Nap, 1, 3)
 for (i in c('Tree1', 'Tree2', 'Tree3')) {
 				residV <- allApples[treef == i] - mean(allApples[treef == i])
 				treeM <- mean(allApples[treef == i])
@@ -137,7 +137,9 @@ xyplot(allApplesh ~ height | treef)
 # Fit a different fixed effect of height for each tree, plus the random effects
 mod6 <- lme(allApplesh ~ height + height / treef, random = ~ 1 | treef)
 mod7 <- lm(allApplesh ~ height * treef)
-xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef)
+xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
+	type=c('p','l','l'),
+ 	distribute.type=T)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
 # generate a new modified dataset if your effect is not obvious
