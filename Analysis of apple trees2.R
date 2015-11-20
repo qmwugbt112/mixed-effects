@@ -117,26 +117,44 @@ abline(v = fitted(mod5)[treef == 'Tree3'], col = 'red')
 
 
 # run this command to modify your data so that weight of each apple depends 
-# on its height in the tree (don't worry too much if you don't understand it)
+# on its height in the tree (don't worry too much if you don't understand it
+# but do make sure you understand the analysis)
 
 allApplesh <- rep(0, 3*Nap)
+# Allocate random heights to all apples
 height <- runif(3*Nap, 1, 3)
+
+# Allocate a different slope (for the weight effect) for each tree
+slopes<-rnorm(3,mean=c(1,10,20),sd=c(1,3,4))
+names(slopes)<-c('Tree1','Tree2','Tree3')
+
+#Allocate a different intercept for each tree
+intercepts<-rnorm(3,mean=80,sd=10)
+names(intercepts)<-c('Tree1','Tree2','Tree3')
+
+# modify the apple weights to have the correpsonding effect of height
 for (i in c('Tree1', 'Tree2', 'Tree3')) {
-				residV <- allApples[treef == i] - mean(allApples[treef == i])
-				treeM <- mean(allApples[treef == i])
-				heightEffect <- height[treef == i] * runif(1, 10, 140) + runif(1, 20, 40)
-				allApplesh[treef == i] <- abs((treeM + heightEffect) / 25 + residV)
+				residV <- 4*(allApples[treef == i] - mean(allApples[treef == i]))
+				heightEffect <- height[treef == i] * slopes[i] + intercepts[i]-min(residV)
+				allApplesh[treef == i] <- heightEffect+ residV
 				}
 
+# ***********************************************************************
+# Make sure you understand from this point on 
  # enable lattice plots
  library(lattice)
 
 # Use xyplot to examine the data
 xyplot(allApplesh ~ height | treef)
 
-# Fit a different fixed effect of height for each tree, plus the random effects
-mod6 <- lme(allApplesh ~ height + height / treef, random = ~ 1 | treef)
+# Fit the fixed effect of height for each tree, 
+# plus random effect for the deviation of slope & intercept for each tree
+mod6 <- lme(allApplesh ~ 0+height, random = ~ height | treef)
+
+# Fit a separate linear regression for each tree using lm
 mod7 <- lm(allApplesh ~ height * treef)
+
+# Plot out the weights vs height on each tree and the fitted lines
 xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
 	type=c('p','l','l'), 	# Points for data lines for fitted values
 	lty=c(0,1,9),		# Line type absent, solid, dashed
