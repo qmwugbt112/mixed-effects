@@ -2,13 +2,13 @@
 # For the initial exercise generate your own unique dataset for trees 1, 2 & 3
 # That means you will be using diffenet data than your neighbours.
 Nap = 20
-apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 15)) # choose some normally distributed random weights
+apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 7)) # choose some normally distributed random weights
 apples1[apples1>149]<-149;apples1[apples1<1]<-1	    # get rid of apples that are too big or small	
 
 apples2 <- rnorm(Nap, rnorm(1, 40, 3), rnorm(1, 20)) # choose some normally distributed random weights
 apples2[apples2>149]<-149;apples2[apples2<1]<-1	     # get rid of apples that are too big or small	
 
-apples3 <- rnorm(Nap, rnorm(1, 60, 3), rnorm(1, 30)) # choose some normally distributed random weights
+apples3 <- rnorm(Nap, rnorm(1, 70, 3), rnorm(1, 30)) # choose some normally distributed random weights
 apples3[apples3>149]<-149;apples3[apples3<1]<-1	     # get rid of apples that are too big or small	
 
 # Set up some graphical parameters
@@ -166,7 +166,7 @@ mod7 <- lm(allApplesh ~ height * treef)
 # Plot out the weights vs height on each tree and the fitted lines
 xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
 	type=c('p','l','l'), 	# Points for data lines for fitted values
-	lty=c(0,1,9),		# Line type absent, solid, dashed
+	lty=c('','1B','11'),	# Line type absent, solid, dashed
  	distribute.type=T,	
  	xlab=list('Height',cex=1.5),
  	ylab=list('Apple Weight',cex=1.5),
