@@ -20,7 +20,7 @@ likeMean1 <- dnorm(xvals, mean = mean(apples1), sd = sd(apples1) / Nap ^ .5) * 1
 likeMean2 <- dnorm(xvals, mean = mean(apples2), sd = sd(apples2) / Nap ^ .5) * 100
 likeMean3 <- dnorm(xvals, mean = mean(apples3), sd = sd(apples3) / Nap ^ .5) * 100
 
-# Plot the raw data
+# Plot the raw data 
 hist(apples1, xlim = c(0, 100), ylim = c(0, max(likeMean1)),
      breaks = seq(0, 150, 5), border = 'purple')
 lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
