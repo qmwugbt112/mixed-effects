@@ -158,15 +158,17 @@ xyplot(allApplesh ~ height | treef)
 
 # Fit the fixed effect of height for each tree, 
 # plus random effect for the deviation of slope & intercept for each tree
-mod6 <- lme(allApplesh ~ 0+height, random = ~ height | treef)
+# Try this a few times, as the algorithm can fail to solve the problem
+# on some attempts.
+mod6 <- lme(allApplesh ~ height, random = ~ height | treef)
 
-# Fit a separate linear regression for each tree using lm
+# For comparison, fit a separate linear regression for each tree using lm
 mod7 <- lm(allApplesh ~ height * treef)
 
 # Plot out the weights vs height on each tree and the fitted lines
 xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
-	type=c('p','l','l'), 	# Points for data lines for fitted values
-	lty=c('','1B','11'),	# Line type absent, solid, dashed
+	type=c('p','l','l'), 	# Points for to observed apple weights, lines for fitted values
+	lty=c('','1B','11'),	# Line type absent, dashed (for mod6) solit (for mod7)
  	distribute.type=T,	
  	xlab=list('Height',cex=1.5),
  	ylab=list('Apple Weight',cex=1.5),
