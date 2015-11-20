@@ -2,9 +2,14 @@
 # For the initial exercise generate your own unique dataset for trees 1, 2 & 3
 # That means you will be using diffenet data than your neighbours.
 Nap = 20
-apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 5))
-apples2 <- rnorm(Nap, rnorm(1, 40, 3), rnorm(1, 15))
-apples3 <- rnorm(Nap, rnorm(1, 80, 3), rnorm(1, 10))
+apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 15)) # choose some normally distributed random weights
+apples1[apples1>149]<-149;apples1[apples1<1]<-1	    # get rid of apples that are too big or small	
+
+apples2 <- rnorm(Nap, rnorm(1, 40, 3), rnorm(1, 20)) # choose some normally distributed random weights
+apples2[apples2>149]<-149;apples2[apples2<1]<-1	     # get rid of apples that are too big or small	
+
+apples3 <- rnorm(Nap, rnorm(1, 60, 3), rnorm(1, 30)) # choose some normally distributed random weights
+apples3[apples3>149]<-149;apples3[apples3<1]<-1	     # get rid of apples that are too big or small	
 
 # Set up some graphical parameters
 par(mfrow = c(3, 1))
@@ -94,6 +99,7 @@ lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
       col = 'purple')
 lines(xvals, likeMean1)
 abline(v = fitted(mod5)[treef == 'Tree1'], col = 'red')
+abline(v = mean(apples1), col = 'blue')
 
 hist(apples2, xlim=c(0, 100), ylim = c(0, max(likeMean2)),
      breaks = seq(0, 150, 5), border = 'red')
@@ -101,6 +107,7 @@ lines(xvals, dnorm(xvals, mean = mean(apples2), sd = sd(apples2)) * 100,
       col = 'red')
 lines(xvals, likeMean2)
 abline(v = fitted(mod5)[treef == 'Tree2'], col = 'red')
+abline(v = mean(apples2), col = 'blue')
 
 hist(apples3, xlim= c (0, 100), ylim = c(0, max(likeMean3)),
      breaks = seq(0, 150, 5), border = 'blue')
@@ -108,11 +115,13 @@ lines(xvals, dnorm(xvals, mean = mean(apples3), sd = sd(apples3)) * 100,
       col = 'blue')
 lines(xvals, likeMean3)
 abline(v = fitted(mod5)[treef == 'Tree3'], col = 'red')
+abline(v = mean(apples3), col = 'blue')
 
-# Are theseequal to the means of each tree?
-# use type out the fitted values 'fitted(mod5)'
-# then use unique(fitted(mod5)) get range of values for each apple (new)
-# compare them to your previous estimates
+# Are these fitted values (red) to the means of each tree (blue line)?
+# type out the fitted values i.e. write 'fitted(mod5)', notice many are similar. Why?
+# then use unique(round(fitted(mod5),2)) to see the different values (new)
+# compare them to your previous estimates unique(round(fitted(mod5),2)).  Why are they different?  
+# How can you explain the direction in which they are different?
 
 
 
