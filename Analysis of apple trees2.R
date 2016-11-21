@@ -2,9 +2,14 @@
 # For the initial exercise generate your own unique dataset for trees 1, 2 & 3
 # That means you will be using diffenet data than your neighbours.
 Nap = 20
-apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 5))
-apples2 <- rnorm(Nap, rnorm(1, 40, 3), rnorm(1, 15))
-apples3 <- rnorm(Nap, rnorm(1, 80, 3), rnorm(1, 10))
+apples1 <- rnorm(Nap, rnorm(1, 20, 3), rnorm(1, 7)) # choose some normally distributed random weights
+apples1[apples1>149]<-149;apples1[apples1<1]<-1	    # get rid of apples that are too big or small	
+
+apples2 <- rnorm(Nap, rnorm(1, 40, 3), rnorm(1, 20)) # choose some normally distributed random weights
+apples2[apples2>149]<-149;apples2[apples2<1]<-1	     # get rid of apples that are too big or small	
+
+apples3 <- rnorm(Nap, rnorm(1, 70, 3), rnorm(1, 30)) # choose some normally distributed random weights
+apples3[apples3>149]<-149;apples3[apples3<1]<-1	     # get rid of apples that are too big or small	
 
 # Set up some graphical parameters
 par(mfrow = c(3, 1))
@@ -15,7 +20,7 @@ likeMean1 <- dnorm(xvals, mean = mean(apples1), sd = sd(apples1) / Nap ^ .5) * 1
 likeMean2 <- dnorm(xvals, mean = mean(apples2), sd = sd(apples2) / Nap ^ .5) * 100
 likeMean3 <- dnorm(xvals, mean = mean(apples3), sd = sd(apples3) / Nap ^ .5) * 100
 
-# Plot the raw data
+# Plot the raw data 
 hist(apples1, xlim = c(0, 100), ylim = c(0, max(likeMean1)),
      breaks = seq(0, 150, 5), border = 'purple')
 lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
@@ -94,6 +99,7 @@ lines(xvals, dnorm(xvals, mean = mean(apples1), sd = sd(apples1)) * 100,
       col = 'purple')
 lines(xvals, likeMean1)
 abline(v = fitted(mod5)[treef == 'Tree1'], col = 'red')
+abline(v = mean(apples1), col = 'blue')
 
 hist(apples2, xlim=c(0, 100), ylim = c(0, max(likeMean2)),
      breaks = seq(0, 150, 5), border = 'red')
@@ -101,6 +107,7 @@ lines(xvals, dnorm(xvals, mean = mean(apples2), sd = sd(apples2)) * 100,
       col = 'red')
 lines(xvals, likeMean2)
 abline(v = fitted(mod5)[treef == 'Tree2'], col = 'red')
+abline(v = mean(apples2), col = 'blue')
 
 hist(apples3, xlim= c (0, 100), ylim = c(0, max(likeMean3)),
      breaks = seq(0, 150, 5), border = 'blue')
@@ -108,36 +115,65 @@ lines(xvals, dnorm(xvals, mean = mean(apples3), sd = sd(apples3)) * 100,
       col = 'blue')
 lines(xvals, likeMean3)
 abline(v = fitted(mod5)[treef == 'Tree3'], col = 'red')
+abline(v = mean(apples3), col = 'blue')
 
-# Are theseequal to the means of each tree?
-# use type out the fitted values 'fitted(mod5)'
-# then use unique(fitted(mod5)) get range of values for each apple (new)
-# compare them to your previous estimates
+# Are these fitted values (red) to the means of each tree (blue line)?
+# type out the fitted values i.e. write 'fitted(mod5)', notice many are similar. Why?
+# then use unique(round(fitted(mod5),2)) to see the different values (new)
+# compare them to your previous estimates unique(round(fitted(mod5),2)).  Why are they different?  
+# How can you explain the direction in which they are different?
 
 
 
 # run this command to modify your data so that weight of each apple depends 
-# on its height in the tree (don't worry too much if you don't understand it)
+# on its height in the tree (don't worry too much if you don't understand it
+# but do make sure you understand the analysis)
 
-allApplesh <- rep(0, 120)
-height <- runif(120, 1, 3)
+allApplesh <- rep(0, 3*Nap)
+# Allocate random heights to all apples
+height <- runif(3*Nap, 1, 3)
+
+# Allocate a different slope (for the weight effect) for each tree
+slopes<-rnorm(3,mean=c(1,10,20),sd=c(1,3,4))
+names(slopes)<-c('Tree1','Tree2','Tree3')
+
+#Allocate a different intercept for each tree
+intercepts<-rnorm(3,mean=80,sd=10)
+names(intercepts)<-c('Tree1','Tree2','Tree3')
+
+# modify the apple weights to have the correpsonding effect of height
 for (i in c('Tree1', 'Tree2', 'Tree3')) {
-				residV <- allApples[treef == i] - mean(allApples[treef == i])
-				treeM <- mean(allApples[treef == i])
-				heightEffect <- height[treef == i] * runif(1, 20, 40) + runif(1, 0, 5)
-				allApplesh[treef == i] <- abs(treeM + heightEffect) / 35 + residV
+				residV <- 4*(allApples[treef == i] - mean(allApples[treef == i]))
+				heightEffect <- height[treef == i] * slopes[i] + intercepts[i]-min(residV)
+				allApplesh[treef == i] <- heightEffect+ residV
 				}
 
+# ***********************************************************************
+# Make sure you understand from this point on 
  # enable lattice plots
  library(lattice)
 
 # Use xyplot to examine the data
 xyplot(allApplesh ~ height | treef)
 
-# Fit a different fixed effect of height for each tree, plus the random effects
-mod6 <- lme(allApplesh ~ height + height / treef, random = ~ 1 | treef)
+# Fit the fixed effect of height for each tree, 
+# plus random effect for the deviation of slope & intercept for each tree
+# Try this a few times, as the algorithm can fail to solve the problem
+# on some attempts.
+mod6 <- lme(allApplesh ~ height, random = ~ height | treef)
+
+# For comparison, fit a separate linear regression for each tree using lm
 mod7 <- lm(allApplesh ~ height * treef)
-xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef)
+
+# Plot out the weights vs height on each tree and the fitted lines
+xyplot(allApplesh + fitted(mod6) + fitted(mod7) ~ height | treef, 
+	type=c('p','l','l'), 	# Points for to observed apple weights, lines for fitted values
+	lty=c('','1B','11'),	# Line type absent, dashed (for mod6) solit (for mod7)
+ 	distribute.type=T,	
+ 	xlab=list('Height',cex=1.5),
+ 	ylab=list('Apple Weight',cex=1.5),
+ 	key=list(text=list('Fixed (solid) & random effects (dashed) regression lines',cex=1.5))
+ 	)
 
 # Advanced topic: Why do the fitted lines from lm and lme differ from each other
 # generate a new modified dataset if your effect is not obvious
