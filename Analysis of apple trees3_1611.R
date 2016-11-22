@@ -11,7 +11,7 @@
 # In the real world, you would here load the data you collected.
 #  For the sake of this exercise, you will generate you own unique dataset,
 #  representing the weights of apples on trees 1, 2 & 3. That means you will
-#  be using diffenet data than your neighbours!
+#  be using different data than your neighbours!
 
 N.apples <- 20 # Number of apples per tree
 
@@ -22,7 +22,7 @@ make.apples <- function(m, s){
   apples
 }
 
-# Use this funtion to create randomly-weighted apples for three trees
+# Use this function to create randomly-weighted apples for three trees
 apples1 <- make.apples(20, 7) 
 apples2 <- make.apples(40, 20)
 apples3 <- make.apples(70, 30)
@@ -195,7 +195,7 @@ names(tree.slopes) <- c('Tree1', 'Tree2', 'Tree3')
 tree.intercepts <- rnorm(3, mean = 80, sd = 10)
 names(tree.intercepts) <- c('Tree1', 'Tree2', 'Tree3')
 
-# Modify the apple weights to have the correpsonding effect of height
+# Modify the apple weights to have the corresponding effect of height
 for(i in c('Tree1', 'Tree2', 'Tree3')){
   resid.var <- 4 * (all.apples.height[tree.factor == i] - mean(all.apples[tree.factor == i]))
   height.effect <- height[tree.factor == i] * tree.slopes[i] + tree.intercepts[i] - min(resid.var)
@@ -236,7 +236,7 @@ mod7 <- lm(all.apples.height ~ height * tree.factor)
 #  This uses a for-loop running the plot-tree and points commands three times,
 #  one for each tree.
 #  green lines - fixed effect (lm)
-#  maroon lines - radom effect (lme)
+#  maroon lines - random effect (lme)
 par(mfrow = c(3, 1))
 for(tree in c("Tree1", "Tree2", "Tree3")){
   plot.tree(tree)
