@@ -18,7 +18,7 @@
 # R nerds may want to dig into it by looking at the file, 
 # but ensure you understand ALL the subsequent code below !!
 
-source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R', chdir = TRUE)
+source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 
 # Grow your own orchard with your own unique data
 # (create a data frame with apple weights)
