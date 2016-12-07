@@ -8,15 +8,16 @@
 ######################################
 # Generating data
 ######################################
-# In the real world, you would here load the data you collected.
-#  For the sake of this exercise, you will generate you own unique dataset,
+# In the real world, you would at this point load the data you collected.
+# For the sake of this exercise, you will generate you own unique dataset,
 #  representing the weights of apples on trees 1, 2 & 3. That means you will
 #  be using different data from your neighbours!
 
-# You do not have to understand the code in accessed by the following
-# command (it creates some functions you will use to generate and plot data)
-# R nerds may want to dig into it by looking at the file, 
-# but ensure you understand ALL the subsequent code below !!
+# You do not have to understand the code accessed by the following
+# source command (it creates some functions you will use to generate and plot data)
+# R nerds may want to dig into it by looking at the file. 
+# HOWEVER ensure you DO understand ALL the subsequent code below !!
+# and can answer all the questions
 
 source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 
