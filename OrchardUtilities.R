@@ -103,11 +103,13 @@ plotLikelihoodMeans<-function(x=my.orchard){
 }	
 
 plotLme<-function(	x=my.orchard,
-						m7=mod7,
-						m6=mod6){
+			m7=mod7,
+			m6=mod6,
+		 	napples=N.apples){
 	plot(	x$Height,
 			x$Apple.Weight,
 			pch=as.numeric(x$Tree),
+	     		col=rep(c('purple','red','blue'),each=napples),
 			xlab='Height',
 			ylab='Apple Weight',
 			main='Models fitted by lm (black) and lme(magenta)')
