@@ -19,7 +19,9 @@
 # HOWEVER ensure you DO understand ALL the subsequent code below !!
 # and can answer all the questions
 
-source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+library(devtools)
+source_url('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+# source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 
 # Grow your own orchard with your own unique data
 # (create a data frame with apple weights)
