@@ -19,7 +19,7 @@
 # HOWEVER ensure you DO understand ALL the subsequent code below !!
 # and can answer all the questions
 
-library(devtools)
+if (!library(devtools,logical.return=T)){install.packages('devtools'); library(devtools)}
 source_url('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 # source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 
