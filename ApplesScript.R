@@ -6,22 +6,35 @@
 
 
 ######################################
-# Generating data
+# Preparing R for the practical
 ######################################
+
+# You do not have to understand the code accessed by the following
+# source command (it creates some functions you will use to generate and plot data.)
+# R nerds may want to dig into it by looking at the file. 
+# HOWEVER ensure you DO understand ALL the subsequent code 
+# after the banner 'Now the practical starts' !!
+# and can answer all the questions
+
+# First go the menu at the top of your R screen and 
+# ------------------------------------------------
+# 	INSTALL THE PACKAGE devtools
+# ------------------------------------------------
+
+# Then copy and paste these two lines of code
+if (!library(devtools,logical.return=T)){install.packages('devtools'); library(devtools)}
+source_url('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+
+# If that does not work try source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+
+# ------------------------------------------------------------------------
+# 		Now the practical starts
+# ------------------------------------------------------------------------
 # In the real world, you would at this point load the data you collected.
 # For the sake of this exercise, you will generate you own unique dataset,
 #  representing the weights of apples on trees 1, 2 & 3. That means you will
 #  be using different data from your neighbours!
 
-# You do not have to understand the code accessed by the following
-# source command (it creates some functions you will use to generate and plot data)
-# R nerds may want to dig into it by looking at the file. 
-# HOWEVER ensure you DO understand ALL the subsequent code below !!
-# and can answer all the questions
-
-if (!library(devtools,logical.return=T)){install.packages('devtools'); library(devtools)}
-source_url('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
-# source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 
 # Grow your own orchard with your own unique data
 # (create a data frame with apple weights)
