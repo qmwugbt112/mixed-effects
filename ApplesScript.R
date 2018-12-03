@@ -8,20 +8,20 @@
 # ------------------------------------------------------------------------
 # Preparing R for the practical
 # ------------------------------------------------------------------------
-
-
-
 # You do not have to understand the code accessed by the following
-# source command 
+# source command.
 # (it creates some functions you will use to generate and plot data.)
 # R nerds may want to dig into it by looking at the file. 
 # HOWEVER ensure you DO understand ALL the subsequent code 
 # after the banner 'Now the practical starts' !!
 # and can answer all the questions
 
-
-
-source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+source(paste("https://raw.githubusercontent.com/",
+             "qmwugbt112/mixed-effects/master/",
+             "OrchardUtilities.R",
+             sep = "")
+       
+)
 
 # If that does not work try 
 # Then copy and paste these two lines of code
@@ -35,13 +35,13 @@ source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/Orchar
 # ------------------------------------------------------------------------
 # In the real world, you would at this point load the data you collected.
 # For the sake of this exercise, you will generate you own unique dataset,
-#  representing the weights of apples on trees 1, 2 & 3. That means you will
-#  be using different data from your neighbours!
+# representing the weights of apples on trees 1, 2 & 3. That means you will
+# be using different data from your neighbours!
 
 
 # Grow your own orchard with your own unique data
 # (create a data frame with apple weights)
-my.orchard<-growMyApples()
+my.orchard <- growMyApples()
 
 # Make sure you understand the data
 head(my.orchard)
@@ -53,9 +53,9 @@ plotMyOrchard(my.orchard)
 
 
 # Extract the weights of the sample of apples on each tree
-apples1<-pickMyApples(my.orchard,1)
-apples2<-pickMyApples(my.orchard,2)
-apples3<-pickMyApples(my.orchard,3)
+apples1 <- pickMyApples(my.orchard, tree = 1)
+apples2 <- pickMyApples(my.orchard, tree = 2)
+apples3 <- pickMyApples(my.orchard, tree = 3)
 
 
 # Use the mean() and sd() commands to obtain the mean and SD for each tree.
@@ -65,17 +65,17 @@ apples3<-pickMyApples(my.orchard,3)
 # Compare them with your neighbour. Remember they got different data.
 # Who's got the better trees?
 # Use the lm() command to find the mean & residual variation for each of
-#  apples1-3. E.g. mod1<-lm(apples1~1); summary(mod1)
+# apples1-3. E.g. mod1<-lm(apples1~1); summary(mod1)
 
 
 # 1) Make sure you understand what the residual standard error is.
 # 2) Make sure you understand what the intercept and 'Std. Error' (of the
-#  		intercept) is, and why it is different.
+# 		intercept) is, and why it is different.
 # 3) How do these values relate to the mean and sd you calculated?
 
 
 # Plot the likelihood curves (normalized)
-#  for each tree's mean apple weight
+# for each tree's mean apple weight
 plotLikelihoodMeans()
 
 # how do these curves relate to the mean and SD of the apple weights in the samples?
@@ -94,20 +94,20 @@ plotLikelihoodMeans()
 # Why are the standard errors for these two values the same, when samples have different variances?
 
 # Load the library allowing you to run mixed effects models.
-library(nlme)
+library(lme4)
 
 # Fit a simple nlme
-mod5 <- lme(Apple.Weights ~ 1, random = ~ 1 | Tree, data=my.orchard)
+mod5 <- lmer(Apple.Weights ~ 1 + (1 | Tree), data = my.orchard)
 
 # Examine the result using the summary() command
 
 # what is the intercept of the fixed effect equal to ?
-# what do the StdDev:    (Intercept) Residual refer to
-# Use the fitted() command to see what the predictions are for each tree
-fitted(mod5)
+# what do the StdDev:  (Intercept) Residual refer to
+# Use the coef() command to see what the predictions are for each tree
+coef(mod5)
 
 # See how these new fitted values compare to the raw mean values
-plotLmeMeans(my.orchard,mod5)
+plotLmeMeans(my.orchard, m5 = mod5)
 
 # Where are these fitted values (red) compared to the means of each tree (blue line)?
 # Compare them to your previous estimates (found using the fitted() function)
@@ -122,12 +122,11 @@ plotLmeMeans(my.orchard,mod5)
 
 
 # Fit height of each apple as a fixed effect for each tree, plus random effect for the
-#  deviation of slope & intercept for each tree. 
+# deviation of slope & intercept for each tree. 
 
-mod6 <- lme(	Apple.Weights~Height, 
-				random = ~ Height | Tree, 
-				data=my.orchard,
-				control=list(opt='optim'))
+mod6 <- lmer(	Apple.Weights~Height + (1 + Height | Tree),
+				data = my.orchard
+				)
 
 # use the summary() function to find the fitted values from mod6
 # in the random effects listing what are the 
@@ -191,7 +190,7 @@ testG <- genotypes[16:30, ]
 trainG <- genotypes[1:15, ]
 
 BLUP1 <- mixed.solve(trainWT, Z = trainG, K = NULL, SE = FALSE,
-                     return.Hinv = FALSE)
+     return.Hinv = FALSE)
 
 # Show that estimated effects matrix-multiplied by genotype is the prediction
 

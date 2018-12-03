@@ -1,6 +1,6 @@
 # Parameters and utility functions for the apple practical
 
-N.apples 	<- 20 # Number of apples per tree
+N.apples 	<- 30 # Number of apples per tree
 N.trees		<- 3  # Number of trees
 heights		<- runif(3 * N.apples, 1, 3) # heights of each apple
 
@@ -10,8 +10,8 @@ heights		<- runif(3 * N.apples, 1, 3) # heights of each apple
 growMyApples<-function(	ntrees 			= 3,
 							nApples 		= N.apples,
 							Height 			= heights,
-							treeIntercept	=c(20,40,70),
-							treeSDs		=c(.7,2,3)*8){
+							treeIntercept	=c(70,80,90),
+							treeSDs		=c(25,30,40)){
 	slopes<-rnorm(ntrees,1,4)
 	Apple.Weights<-rnorm(	ntrees*nApples,
 								mean=Height*rep(slopes,each=nApples)+
