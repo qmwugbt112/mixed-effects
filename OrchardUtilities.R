@@ -10,7 +10,7 @@ heights		<- runif(3 * N.apples, 1, 3) # heights of each apple
 growMyApples<-function(	ntrees 			= 3,
 							nApples 		= N.apples,
 							Height 			= heights,
-							treeIntercept	=c(70,80,90),
+							treeIntercept	=c(25,30,40),
 							treeSDs		=c(25,30,40)){
 	slopes<-rnorm(ntrees,1,4)
 	Apple.Weights<-rnorm(	ntrees*nApples,
