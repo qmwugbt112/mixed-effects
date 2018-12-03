@@ -1,6 +1,6 @@
 # Parameters and utility functions for the apple practical
 
-N.apples 	<- 30 # Number of apples per tree
+N.apples 	<- 100 # Number of apples per tree
 N.trees		<- 3  # Number of trees
 heights		<- runif(3 * N.apples, 1, 3) # heights of each apple
 
