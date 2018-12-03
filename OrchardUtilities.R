@@ -40,7 +40,7 @@ plotMyOrchard<-function(x=my.orchard){
 	appleRange<-seq(min(x$Apple.Weights)-0.001,max(x$Apple.Weights)+0.001,,150)
 # Histograms and curves
 	yvals<-dnorm(x.vals, mean = mean(apples1), sd = sd(apples1)) * 100
-	hist(apples1, xlim = c(0, 120), ylim = c(0, max(yvals)),
+	hist(apples1, xlim = c(0, 120),
      breaks = appleRange, border = 'purple')
 	lines(x.vals, yvals,
       col = 'purple')
