@@ -1,31 +1,34 @@
-######################################
-######################################
-# Analysis of the apple trees
-######################################
-# Version Dec 2016 ###################
+#------------------------------------------------------------------------
+#Analysis of the apple trees
+# ------------------------------------------------------------------------
+# Version Dec 2018 #
+# ------------------------------------------------------------------------
 
 
-######################################
+# ------------------------------------------------------------------------
 # Preparing R for the practical
-######################################
+# ------------------------------------------------------------------------
+
+
 
 # You do not have to understand the code accessed by the following
-# source command (it creates some functions you will use to generate and plot data.)
+# source command 
+# (it creates some functions you will use to generate and plot data.)
 # R nerds may want to dig into it by looking at the file. 
 # HOWEVER ensure you DO understand ALL the subsequent code 
 # after the banner 'Now the practical starts' !!
 # and can answer all the questions
 
-# First go the menu at the top of your R screen and 
-# ------------------------------------------------
-# 	INSTALL THE PACKAGE devtools
-# ------------------------------------------------
 
+
+source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+
+# If that does not work try 
 # Then copy and paste these two lines of code
-if (!library(devtools,logical.return=T)){install.packages('devtools'); library(devtools)}
-source_url('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
+# if (!library(devtools,logical.return=T)){
+# install.packages('devtools')
+# library(devtools)}
 
-# If that does not work try source('https://raw.githubusercontent.com/qmwugbt112/mixed-effects/master/OrchardUtilities.R')
 
 # ------------------------------------------------------------------------
 # 		Now the practical starts

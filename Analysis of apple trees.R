@@ -2,8 +2,8 @@
 
 # For the initial exercise use the following code 
 # to generate your own unique dataset for tree1, 2 & 3
-Na=20
-apples1<-rnorm(Na,rnorm(1,20,3),rnorm(1,5))
+Na <- 20
+apples1 <-rnorm(Na,rnorm(1,20,3),rnorm(1,5))
 apples2<-rnorm(Na,rnorm(1,40,3),rnorm(1,15))
 apples3<-rnorm(Na,rnorm(1,80,3),rnorm(1,10))
 
