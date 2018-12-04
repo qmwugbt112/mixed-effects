@@ -5,8 +5,8 @@ n_trees    <- 3  # Number of trees
 heights    <- runif(3 * n_apples, 1, 3) # heights of each apple
 
 # Allocate random heights to all apples
-  
-  
+
+
 grow_my_apples <- function(ntrees = 3,
                            n_ap = n_apples,
                            height = heights,
@@ -146,7 +146,7 @@ plot_lme_means <- function(x = my.orchard,
     mean = mean(tree),
     sd = sd(tree) / n_apples ^ .5) * 100
   }
-  
+
   apple_range <- seq(from = min(x$apple_weights) - 0.001,
                    to = max(x$apple_weights) + 0.001,
                    length.out = 150)
@@ -169,15 +169,15 @@ plot_lme_means <- function(x = my.orchard,
   hist(apples2, xlim=c(0, 120), ylim = c(0, max(like_mean2)),
        breaks = apple_range,
        border = "red")
-  lines(x.vals, dnorm(x.vals, mean = mean(apples2), sd = sd(apples2)) * 100, 
+  lines(x.vals, dnorm(x.vals, mean = mean(apples2), sd = sd(apples2)) * 100,
       col = "red")
   lines(x.vals, like_mean2)
   abline(v = fitted(m5)[x$tree == 2], col = "red")
   abline(v = mean(apples2), col = "blue")
 
-  hist(apples3, xlim= c (0, 120), ylim = c(0, max(like_mean3)), 
+  hist(apples3, xlim= c (0, 120), ylim = c(0, max(like_mean3)),
      breaks = apple_range, border = "blue")
-  lines(x.vals, dnorm(x.vals, mean = mean(apples3), sd = sd(apples3)) * 100, 
+  lines(x.vals, dnorm(x.vals, mean = mean(apples3), sd = sd(apples3)) * 100,
       col = "blue")
   lines(x.vals, like_mean3)
   abline(v = fitted(m5)[x$tree == 3], col = "red")
