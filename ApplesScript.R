@@ -11,8 +11,8 @@
 # You do not have to understand the code accessed by the following
 # source command.
 # (it creates some functions you will use to generate and plot data.)
-# R nerds may want to dig into it by looking at the file. 
-# HOWEVER ensure you DO understand ALL the subsequent code 
+# R nerds may want to dig into it by looking at the file.
+# HOWEVER ensure you DO understand ALL the subsequent code
 # after the banner 'Now the practical starts' !!
 # and can answer all the questions
 
@@ -22,11 +22,7 @@ source(paste("https://raw.githubusercontent.com/",
              sep = "")
 )
 
-# If that does not work try 
-# Then copy and paste these two lines of code
-# if (!library(devtools,logical.return=T)){
-# install.packages('devtools')
-# library(devtools)}
+
 
 
 # ------------------------------------------------------------------------
@@ -84,7 +80,7 @@ plot_likelihood_means()
 # Using lm to compare trees
 #################################
 
-# Use mod4<-lm(Apple.Weights~Tree,data=my.orchard) to fit all 3 tree means.
+# Use mod4<-lm(apple_weights ~ tree, data = my.orchard) to fit all 3 tree means.
 
 # Use the summary() command to look at the results.
 
@@ -120,8 +116,8 @@ plot_lme_means(my.orchard, m5 = mod5)
 #################################################
 
 
-# Fit height of each apple as a fixed effect for each tree, plus random effect for the
-# deviation of slope & intercept for each tree. 
+# Fit an overall mean for each tree, plus random effects for the
+# deviation of slope & intercept for each tree.
 
 mod6 <- lmer(	apple_weights ~ 1 + ( 1 + height | tree ),
 				data = my.orchard
@@ -129,7 +125,7 @@ mod6 <- lmer(	apple_weights ~ 1 + ( 1 + height | tree ),
 
 
 # use the summary() function to find the fitted values from mod6
-# in the random effects listing what are the 
+# in the random effects listing what are the
 # Std.Dev. tree
 # StdDev Residual
 # What are the fixed effects
@@ -202,7 +198,7 @@ plot(est1, train_wt)
 # compare the prediction vs the true values
 plot(est1, expected_wt[1:15])
 
-# now the harder task, use the estimates to predict the phenotypes that were 
+# now the harder task, use the estimates to predict the phenotypes that were
 # excluded from the analysis
 
 est2 <- as.vector(testG %*% blup1$u)
