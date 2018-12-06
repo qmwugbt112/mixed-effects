@@ -119,7 +119,7 @@ plot_lme_means(my.orchard, m5 = mod5)
 # Fit an overall mean for each tree, plus random effects for the
 # deviation of slope & intercept for each tree.
 
-mod6 <- lmer(	apple_weights ~ 1 + ( 1 + height | tree ),
+mod6 <- lmer(	apple_weights ~ 0 + ( 1 + height | tree ),
 				data = my.orchard
 				)
 
